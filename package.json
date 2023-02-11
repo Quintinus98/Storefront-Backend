@@ -1,0 +1,47 @@
+{
+  "name": "starter-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon src/server.ts",
+    "test": "export ENV=test && npx tsc && db-migrate up -e test && jasmine && db-migrate down -e test",
+    "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
+    "tsc": "tsc",
+    "lint": "eslint . --ext .ts --fix",
+    "prettier": "npx prettier --write src/"
+  },
+  "author": "Obodo David",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/jasmine": "^4.3.1",
+    "@types/node": "^18.11.18",
+    "@types/pg": "^8.6.6",
+    "@types/supertest": "^2.0.12",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.13",
+    "eslint": "^8.30.0",
+    "jasmine": "^4.5.0",
+    "jasmine-spec-reporter": "^7.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "2.8.1",
+    "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
+    "tsc-watch": "^6.0.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.8.0"
+  }
+}
