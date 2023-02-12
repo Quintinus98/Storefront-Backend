@@ -14,13 +14,11 @@ Your application must make use of the following libraries:
 - jasmine from npm for testing
 
 # How to Run the Storefront-Backend
-
+Set up a .env file using the .envTemplate file provided. Note, SALT_ROUNDS should be a number between 1-10.
 ## Database Setup
-Create a database called **fantasy_worlds** with postgres
-
-Run **db-migrate up**
-
-Run **npm run start**
+- Create a database called **fantasy_worlds** with postgres
+- Run **db-migrate up**
+- Run **npm run start**
 
 
 # How to Use the API
@@ -29,8 +27,6 @@ Follow the steps below.
 Start By Creating a User - there's much you can do as a user.
 ### Create a user
 POST localhost:3000/users/
-
-Sample user
 ```sh
 {
     "firstname": "myname",
@@ -116,7 +112,7 @@ POST localhost:3000/order/
 ```sh
 {
     "quantity": 2,
-    "productId": "3"
+    "product_id": "3"
 }
 ```
 ### Delete order

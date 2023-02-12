@@ -28,8 +28,8 @@ export const show = async (req: Request, res: Response) => {
 export const create = async (req: Request, res: Response) => {
   const myOrder: Order = {
     user_id: res.locals.user_id,
-    productId: req.body.productId,
-    quantity: req.body.quantity,
+    product_id: req.body.product_id,
+    quantity: parseInt(req.body.quantity),
     status: "active"
   };
   try {

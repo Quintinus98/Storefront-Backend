@@ -35,7 +35,7 @@ describe("User Model", () => {
       lastname: "Obodo",
       password: "ccross"
     };
-    const id = "1";
+    const id = "2";
     const result = await userStore.update(updatedUser, id);
     expect(result).toBeDefined();
   });
@@ -51,7 +51,7 @@ describe("User Model", () => {
     expect(userStore.delete).toBeDefined();
   });
   it("should delete a user",async () => {
-    await userStore.delete(1);
+    await userStore.delete(2);
     const result = await userStore.index();
     expect(result).toEqual([]);
   });
