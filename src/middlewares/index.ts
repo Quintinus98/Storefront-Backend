@@ -22,18 +22,15 @@ export const verifyAuthToken = (req: Request, res: Response, next: NextFunction)
 };
   
 export const verifyAuthUser = (req: Request, res: Response, next: NextFunction) => {
-  const id = parseInt(req.params.id);
   try {
     const authorizationHeader = req.headers.authorization;
     const token = (authorizationHeader?.split(" ")[1] as unknown) as string;
     const decoded: jwt.JwtPayload = (jwt.verify(token, process.env.TOKEN_SECRET) as unknown) as jwt.JwtPayload;
-  
-    if (decoded.user.id !== id) {
-      throw new Error("User does not match");
-    }
+
+    res.locals.user_id = decoded.user.id;
     next();
   } catch (error) {
-    res.status(401).json(`Cannot update user, ${error}`);
+    res.status(401).json(`Cannot verify user, ${error}`);
     return;
   }
 };

@@ -1,39 +1,20 @@
 import Client from "../database";
-
-export interface productOrders {
-    name: string,
-    price: number,
-    order_id: string
-}
+import { Order } from "../models/order";
 
 export class DashboardQueries {
-    async productsInOrders(): Promise<productOrders[]> {
-        try {
-            const conn = await Client.connect();
-            const sql = "SELECT name, price, order_id FROM products INNER JOIN order_products ON products.id = order_products.id";
-            const result = await conn.query(sql);
 
-            conn.release();
-    
-            return result.rows;
-        } catch (error) {
-            throw new Error("Unable to get products in order.");
-        }
-    }
+  async completedOrders(user_id: string, status: string): Promise<Order[]> {
+    try {
+      const conn = await Client.connect();
+      const sql = "SELECT * FROM orders WHERE user_id = $1 AND status = $2";
+      const result = await conn.query(sql, [user_id, status]);
 
-    async usersWithOrders(): Promise<{firstname: "string", lastname: "string"}[]> {
-        try {
-            const conn = await Client.connect();
-            const sql = "SELECT firstname, lastname FROM users INNER JOIN orders ON users.id = orders.user_id";
-            const result = await conn.query(sql);
+      conn.release();
 
-            conn.release();
-
-            return result.rows;
-        } catch (error) {
-            throw new Error("Unable to fetch users with orders.");
+      return result.rows;
+    } catch (error) {
+      throw new Error("Unable to fetch completed orders.");
             
-        }
     }
+  }
 }
-

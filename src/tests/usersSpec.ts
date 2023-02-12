@@ -1,6 +1,6 @@
-import { User, user } from "../models/user";
+import { UserStore, user } from "../models/user";
 
-const userStore = new User();
+const userStore = new UserStore();
 
 
 describe("User Model", () => {
@@ -18,21 +18,33 @@ describe("User Model", () => {
     expect(userStore.create).toBeDefined();
   });
   it("should create a new user", async () => {
-    const myWeapon: user = {
+    const newUser: user = {
       firstname: "David",
       lastname: "Obodo",
-      username: "Quentinsop",
       password: "mynigga"
     };
-    const result = await userStore.create(myWeapon);
+    const result = await userStore.create(newUser);
+    expect(result).toBeDefined();
+  });
+  it("should have an update method",async () => {
+    expect(userStore.update).toBeDefined();
+  });
+  it("should update an existing user",async () => {
+    const updatedUser: user = {
+      firstname: "Peter",
+      lastname: "Obodo",
+      password: "ccross"
+    };
+    const id = "1";
+    const result = await userStore.update(updatedUser, id);
     expect(result).toBeDefined();
   });
   it("should authenticate a user", async () => {
-    const myWeapon = {
-      username: "Quentinsop",
+    const authUser = {
+      firstname: "Quentinsop",
       password: "mynigga",
     };
-    const result = await userStore.authenticate(myWeapon);
+    const result = await userStore.authenticate(authUser);
     expect(result).toBeDefined();
   });
   it("should have an delete method", () => {

@@ -12,7 +12,6 @@ export type user = {
   id?: number,
   firstname: string,
   lastname: string,
-  username: string, 
   password: string,
 }
 
@@ -44,11 +43,11 @@ export class UserStore {
     try { 
       const conn = await Client.connect();
       const saltRounds = parseInt(process.env.SALT_ROUNDS);
-      const sql = "INSERT INTO users (firstname, lastname, username, password) VALUES ($1, $2, $3, $4) RETURNING *";
+      const sql = "INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *";
 
-      const hash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
+      const passwordHash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
       
-      const result = await conn.query(sql, [u.firstname, u.lastname, u.username, hash]);
+      const result = await conn.query(sql, [u.firstname, u.lastname, passwordHash]);
       const newUser = result.rows[0];
       conn.release();
 
@@ -62,11 +61,11 @@ export class UserStore {
     try { 
       const conn = await Client.connect();
       const saltRounds = parseInt(process.env.SALT_ROUNDS);
-      const sql = "UPDATE users SET firstname = $1, lastname = $2, username = $3, password = $4 WHERE id = $5 RETURNING *";
+      const sql = "UPDATE users SET firstname = $1, lastname = $2, password = $3 WHERE id = $4 RETURNING *";
 
-      const hash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
+      const passwordHash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
       
-      const result = await conn.query(sql, [u.firstname, u.lastname, u.username, hash, id]);
+      const result = await conn.query(sql, [u.firstname, u.lastname, passwordHash, id]);
       const updatedUser = result.rows[0];
       conn.release();
 
@@ -89,20 +88,19 @@ export class UserStore {
             
     }
   }
-  async authenticate (u: {username: string, password: string}) {
+  async authenticate (u: {firstname: string, password: string}) {
     const conn = await Client.connect();
-    const sql = "SELECT * FROM users WHERE username=($1)";
-    const result = await conn.query(sql, [u.username]);
+    const sql = "SELECT * FROM users WHERE firstname=($1)";
+    const result = await conn.query(sql, [u.firstname]);
 
-    conn.release();
     if (result.rows.length) {
       const user = result.rows[0];
-      console.log(user);
-      
       if (bcrypt.compareSync(u.password + process.env.BCRYPT_PASSWORD, user.password)) {
         return user;
       }
     }
+    conn.release();
+
     return null;
   }
 }

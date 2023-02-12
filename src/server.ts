@@ -4,7 +4,7 @@ import cors from "cors";
 import userRoute from "./routes/usersRoute";
 import orderRoute from "./routes/orderRoute";
 import productRoute from "./routes/productRoute";
-import dashboardRoute from "./routes/dashboardRoute";
+import { verifyAuthUser } from "./middlewares";
 
 const app: express.Application = express();
 const port = 3000;
@@ -21,9 +21,8 @@ app.get("/", (_req: Request, res: Response): void => {
 });
 
 app.use("/users", userRoute);
-app.use("/orders", orderRoute);
+app.use("/orders", verifyAuthUser, orderRoute);
 app.use("/products", productRoute);
-app.use("/dashboard", dashboardRoute)
 
 app.listen(port, (): void => {
   console.log(`Server running on http://localhost:${port}`);

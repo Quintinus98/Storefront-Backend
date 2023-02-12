@@ -33,23 +33,23 @@ export const create = async (req: Request, res: Response) => {
 };
 
 export const update = async (req: Request, res: Response) => {
-    const product: Product = {
-      name: req.body.name,
-      price: req.body.price
-    };
-  
-    const id = req.params.id;
-  
-    try {
-      const updatedProduct = await store.update(product, id);
-      res.json(updatedProduct);
-    } catch (error) {
-      res.status(400).json(`${error}`);
-    }
+  const product: Product = {
+    name: req.body.name,
+    price: req.body.price
   };
+  
+  const id = req.params.id;
+  
+  try {
+    const updatedProduct = await store.update(product, id);
+    res.json(updatedProduct);
+  } catch (error) {
+    res.status(400).json(`${error}`);
+  }
+};
 
 export const destroy = async (req: Request, res: Response): Promise<void> => {
   const id = parseInt(req.params.id);
   const product = await store.delete(id);
-  res.json(product)
+  res.json(product);
 };
