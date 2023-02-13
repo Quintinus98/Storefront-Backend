@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "start": "nodemon src/server.ts",
-    "db": "db-migrate down -e test && db-migrate db:drop test",
+    "drop-db": "db-migrate db:drop test",
     "test": "export ENV=test && npx tsc && db-migrate db:create test && db-migrate up -e test && jasmine && db-migrate db:drop test",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "tsc": "tsc",

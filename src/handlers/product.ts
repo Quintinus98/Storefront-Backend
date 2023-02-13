@@ -4,8 +4,12 @@ import { Product, ProductStore } from "../models/product";
 const store = new ProductStore();
 
 export const index = async (_req: Request, res: Response) => {
-  const products = await store.index();
-  res.json(products);
+  try {
+    const products = await store.index();
+    res.json(products);
+  } catch (error) {
+    res.status(400).json(`Failed to fetch products. ${error}`)
+  }
 };
 
 export const show = async (req: Request, res: Response) => {
@@ -14,7 +18,7 @@ export const show = async (req: Request, res: Response) => {
     const product = await store.show(id);
     res.json(product);
   } catch (error) {
-    res.status(400).json(`${error}`);
+    res.status(400).json(`Requested product failed to return. ${error}`);
   }
 };
 
@@ -49,7 +53,11 @@ export const update = async (req: Request, res: Response) => {
 };
 
 export const destroy = async (req: Request, res: Response): Promise<void> => {
-  const id = parseInt(req.params.id);
-  const product = await store.delete(id);
-  res.json(product);
+  try {
+    const id = parseInt(req.params.id);
+    const product = await store.delete(id);
+    res.json(product);
+  } catch (error) {
+    res.status(400).json(`Cannot delete product. ${error}`)
+  }
 };

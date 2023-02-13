@@ -10,6 +10,20 @@ const request = supertest(app);
 export const authorization: string = 
 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImZpcnN0bmFtZSI6IkRhdmlkIiwibGFzdG5hbWUiOiJPYm9kbyIsInBhc3N3b3JkIjoiJDJiJDEwJHNtcmgvRVNvVll4TjQ5RVNuT1VGTE9KNUMzUng1VFlENVlkdS9EQy91SkRacnRIZGNOdGM2IiwiaWQiOjF9LCJpYXQiOjE2NzYyOTM3ODV9.bLXeXpW8Bcfm_tjnx87qimOW9UcWgpXZcOUnOklXIJQ"
 
+/**
+ * Please Note.
+ * 
+ * For your environment variables use    TOKEN_SECRET=quentin98!
+ * If you use any other apart from that, you will need to change the authorization string. 
+ * 
+ * If you must provide your own details be sure to generate a Token and replace it
+ * with the one I have provided (authorization).
+ * 
+ * Looking at your code errors, it appears that your tests are failing because of
+ * an invalid signature. 
+ */
+
+
 describe('Users API test', () => {
   it('POST /users', async () => {
     await request

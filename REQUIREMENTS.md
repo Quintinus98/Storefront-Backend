@@ -41,3 +41,62 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+### order_products
+- id
+- quantity
+- order_id
+- product_id
+
+## Users
+                                     Table "public.users"
+  Column   |          Type          | Collation | Nullable |              Default              
+-----------+------------------------+-----------+----------+-----------------------------------
+ firstname | character varying(100) |           |          | 
+ lastname  | character varying(100) |           |          | 
+ password  | text                   |           |          | 
+ id        | integer                |           | not null | nextval('users_id_seq'::regclass)
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "orders" CONSTRAINT "orders_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
+
+## Products
+                                    Table "public.products"
+ Column |          Type          | Collation | Nullable |               Default                
+--------+------------------------+-----------+----------+--------------------------------------
+ id     | integer                |           | not null | nextval('products_id_seq'::regclass)
+ name   | character varying(100) |           |          | 
+ price  | integer                |           | not null | 
+Indexes:
+    "products_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "order_products" CONSTRAINT "order_products_product_id_fkey" FOREIGN KEY (product_id) REFERENCES products(id)
+
+## Orders
+                                    Table "public.orders"
+ Column  |         Type          | Collation | Nullable |              Default               
+---------+-----------------------+-----------+----------+------------------------------------
+ id      | integer               |           | not null | nextval('orders_id_seq'::regclass)
+ status  | character varying(64) |           |          | 
+ user_id | bigint                |           |          | 
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "orders_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
+Referenced by:
+    TABLE "order_products" CONSTRAINT "order_products_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+
+## Order_products
+                             Table "public.order_products"
+   Column   |  Type   | Collation | Nullable |                  Default                   
+------------+---------+-----------+----------+--------------------------------------------
+ id         | integer |           | not null | nextval('order_products_id_seq'::regclass)
+ quantity   | integer |           |          | 
+ order_id   | bigint  |           |          | 
+ product_id | bigint  |           |          | 
+Indexes:
+    "order_products_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "order_products_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id)
+    "order_products_product_id_fkey" FOREIGN KEY (product_id) REFERENCES products(id)

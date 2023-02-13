@@ -20,6 +20,9 @@ Set up a .env file using the .envTemplate file provided. Note, SALT_ROUNDS shoul
 - Run **db-migrate up**
 - Run **npm run start**
 
+## USEFUL PORTS
+- Database is running on - 5432
+- Backend is running on - 3000
 
 # How to Use the API
 Follow the steps below.
