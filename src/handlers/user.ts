@@ -52,9 +52,9 @@ export const update = async (req: Request, res: Response) => {
     password: req.body.password,
   };
 
-  const id = req.params.id;
+  const id = parseInt(req.params.id);  
 
-  if (res.locals.user_id !== id) {
+  if (parseInt(res.locals.user_id) !== id) {
     res.status(404).json({"error": "User does not match"});
     return;
   }
@@ -71,7 +71,7 @@ export const update = async (req: Request, res: Response) => {
 export const destroy = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   
-  if (res.locals.user_id !== id) {
+  if (parseInt(res.locals.user_id) !== id) {
     res.status(404).json({"error": "User does not match"});
     return;
   }

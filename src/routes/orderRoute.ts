@@ -4,7 +4,8 @@ import {
   show,
   create,
   completeOrder,
-  destroy
+  addProduct,
+  destroy,
 } from "../handlers/order";
 import { completedOrders } from "../handlers/dashboard";
 
@@ -12,10 +13,11 @@ const router: Router = express.Router();
 
 
 router.get("/", index);
-router.get("/completed", completedOrders);
-router.get("/:id", show);
-router.post("/", create);
 router.post("/:id", completeOrder);
+router.post("/", create);
+router.get("/:id", show);
+router.get("/ctd", completedOrders);
+router.post("/:id/products", addProduct);
 router.delete("/:id", destroy);
 
 export default router;

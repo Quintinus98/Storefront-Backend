@@ -5,6 +5,7 @@ import userRoute from "./routes/usersRoute";
 import orderRoute from "./routes/orderRoute";
 import productRoute from "./routes/productRoute";
 import { verifyAuthUser } from "./middlewares";
+import { completedOrders } from "./handlers/dashboard";
 
 const app: express.Application = express();
 const port = 3000;
@@ -23,6 +24,7 @@ app.get("/", (_req: Request, res: Response): void => {
 app.use("/users", userRoute);
 app.use("/orders", verifyAuthUser, orderRoute);
 app.use("/products", productRoute);
+app.use("/completed_orders", verifyAuthUser, completedOrders)
 
 app.listen(port, (): void => {
   console.log(`Server running on http://localhost:${port}`);

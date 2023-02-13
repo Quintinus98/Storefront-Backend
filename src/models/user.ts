@@ -57,7 +57,7 @@ export class UserStore {
     }
   }
   
-  async update(u: user, id: string): Promise<user> {
+  async update(u: user, id: number): Promise<user> {
     try { 
       const conn = await Client.connect();
       const saltRounds = parseInt(process.env.SALT_ROUNDS);

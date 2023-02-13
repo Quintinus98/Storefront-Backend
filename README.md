@@ -109,12 +109,7 @@ POST localhost:3000/orders/:id - replace :id with a number.
 
 ### To create an order
 POST localhost:3000/order/
-```sh
-{
-    "quantity": 2,
-    "product_id": "3"
-}
-```
+
 ### Delete order
 DELETE localhost:3000/orders/:id
 
