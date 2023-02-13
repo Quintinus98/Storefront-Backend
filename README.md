@@ -114,4 +114,4 @@ POST localhost:3000/order/
 DELETE localhost:3000/orders/:id
 
 ## Completed Order
-Get localhost:3000/orders/completed
+Get localhost:3000/completed_orders
