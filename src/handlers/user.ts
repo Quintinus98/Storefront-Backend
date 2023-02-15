@@ -20,7 +20,7 @@ export const index = async (_req: Request, res: Response) => {
     const allUser = await store.index();
     res.json(allUser);
   } catch (error) {
-    res.status(400).json(`Cannot get users. ${error}`)
+    res.status(400).json(`Cannot get users. ${error}`);
   }
 };
 
@@ -84,7 +84,7 @@ export const destroy = async (req: Request, res: Response) => {
     const user = await store.delete(id);
     res.json(user);
   } catch (error) {
-    res.status(400).json(`Cannot delete user. ${error}`)
+    res.status(400).json(`Cannot delete user. ${error}`);
   }
 };
 

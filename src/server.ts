@@ -24,7 +24,7 @@ app.get("/", (_req: Request, res: Response): void => {
 app.use("/users", userRoute);
 app.use("/orders", verifyAuthUser, orderRoute);
 app.use("/products", productRoute);
-app.use("/completed_orders", verifyAuthUser, completedOrders)
+app.use("/completed_orders", verifyAuthUser, completedOrders);
 
 app.listen(port, (): void => {
   console.log(`Server running on http://localhost:${port}`);

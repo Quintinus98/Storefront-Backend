@@ -8,7 +8,7 @@ export const index = async (_req: Request, res: Response) => {
     const products = await store.index();
     res.json(products);
   } catch (error) {
-    res.status(400).json(`Failed to fetch products. ${error}`)
+    res.status(400).json(`Failed to fetch products. ${error}`);
   }
 };
 
@@ -58,6 +58,6 @@ export const destroy = async (req: Request, res: Response): Promise<void> => {
     const product = await store.delete(id);
     res.json(product);
   } catch (error) {
-    res.status(400).json(`Cannot delete product. ${error}`)
+    res.status(400).json(`Cannot delete product. ${error}`);
   }
 };

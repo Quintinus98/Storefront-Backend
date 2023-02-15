@@ -46,12 +46,10 @@ export class UserStore {
       const sql = "INSERT INTO users (firstname, lastname, password) VALUES ($1, $2, $3) RETURNING *";
 
       const passwordHash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
-      
       const result = await conn.query(sql, [u.firstname, u.lastname, passwordHash]);
-      const newUser = result.rows[0];
+      
       conn.release();
-
-      return newUser;
+      return result.rows[0];
     } catch (error) {
       throw new Error(`Could not add new user. ${error}`);
     }
@@ -66,10 +64,9 @@ export class UserStore {
       const passwordHash = bcrypt.hashSync(u.password + process.env.BCRYPT_PASSWORD, saltRounds);
       
       const result = await conn.query(sql, [u.firstname, u.lastname, passwordHash, id]);
-      const updatedUser = result.rows[0];
       conn.release();
 
-      return updatedUser;
+      return result.rows[0];
     } catch (error) {
       throw new Error(`Could not update user. ${error}`);
     }
