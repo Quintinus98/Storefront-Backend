@@ -1,9 +1,10 @@
 POSTGRES_HOST = '127.0.0.1'
 POSTGRES_DB = 'fantasy_worlds'
 POSTGRES_TEST_DB = 'test'
-POSTGRES_USER = 'someUser'
-POSTGRES_PASSWORD = 'somePassword'
+POSTGRES_USER = 'postgres'
+POSTGRES_PASSWORD = 'postgres'
 ENV = 'dev'
 BCRYPT_PASSWORD='somerandompassword'
-SALT_ROUNDS=number(1-10)
+SALT_ROUNDS=10
 TOKEN_SECRET='someToken'
+Authorization='Bearer '
