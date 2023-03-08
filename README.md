@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+This repo contains a basic Node and Express app that implements the backend functionality of an E-commerce applications. To get started, clone this repo and run `yarn` in your terminal at the project root.
 
 ## Required Technologies
 Your application must make use of the following libraries:
@@ -101,20 +101,9 @@ DELETE localhost:3000/products/:id
 ## Step 3
 Navigating the orders route. Must be authenticated to perform any action.
 
-### To get all orders for current user visit the endpoint
-Get localhost:3000/orders/
-
-### To show a specific order
-Get localhost:3000/orders/:id - replace :id with a number.
-
-### To Complete an order
-POST localhost:3000/orders/:id - replace :id with a number.
-
-### To create an order
-POST localhost:3000/order/
-
-### Delete order
-DELETE localhost:3000/orders/:id
-
-## Completed Order
-Get localhost:3000/completed_orders
+- **Get all orders**:       GET localhost:3000/orders/
+- **Get specific order**:   GET localhost:3000/orders/:id
+- **Complete an order**:    POST localhost:3000/orders/:id
+- **Create an order**:      POST localhost:3000/order/
+- **Delete an order**:      DELETE localhost:3000/orders/:id
+- **Get Completed order**:  GET localhost:3000/completed_orders
